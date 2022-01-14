@@ -1,0 +1,50 @@
+from ._anvil_designer import UploadTemplate
+from anvil import *
+import anvil.server
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+result = False
+
+c= FileLoader()
+class Upload(UploadTemplate):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    # Any code you write here will run when the form opens.
+    
+
+  def link_5_click(self, **event_args):
+    open_form('StartUp', my_parameter="an_argument")
+    pass
+
+  def button_1_click(self, **event_args):
+     Notification("Your NFT is uploaded successfully ", title="Congrats!").show()
+     pass
+
+  def nft_file_box_change(self, file, **event_args):
+     name = self.name_box.text
+     id = self.id_box.text
+     value = self.value_box.text
+     owner = anvil.users.get_user()
+     artist=owner
+     anvil.server.call('add_nft',id, name, value,artist,owner,file)
+     
+     pass
+
+  def link_2_click(self, **event_args):
+    open_form('Browse', my_parameter="an_argument")
+    pass
+
+  def link_3_click(self, **event_args):
+    open_form('Upload', my_parameter="an_argument")
+    pass
+
+  def link_4_click(self, **event_args):
+    open_form('Account', my_parameter="an_argument")
+    pass

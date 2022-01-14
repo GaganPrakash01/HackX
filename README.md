@@ -22,3 +22,4 @@ Artists create their artwork and publish them as an NFT on the web application. 
 Other users can trade artworks of their liking and own them for a certain price. Hence each time an artwork is traded , the artist gets 5% of the traded amount as royalty.
 Hence the artists are able to showcase their work and build a network with the outside world. The royalties give them the much needed financial aid for their talent.
 
+![image](Screenshot 2022-01-15 032554.png)

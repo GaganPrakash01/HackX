@@ -1,0 +1,74 @@
+from ._anvil_designer import BrowseTemplate
+from anvil import *
+import anvil.server
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+class Browse(BrowseTemplate):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    self.repeating_panel_1.items = app_tables.nft.search()
+    
+
+  def link_5_click(self, **event_args):
+    open_form('Startup', my_parameter="an_argument")
+    pass
+
+  def link_2_click(self, **event_args):
+    open_form('Browse', my_parameter="an_argument")
+    pass
+
+  def link_3_click(self, **event_args):
+    open_form('Upload', my_parameter="an_argument")
+    pass
+
+  def link_4_click(self, **event_args):
+    open_form('Account', my_parameter="an_argument")
+    pass
+
+  def button_1_click(self, **event_args):
+    curuser = anvil.users.get_user()
+    email = curuser['email']
+    pass
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+from ._anvil_designer import ItemTemplate1Template
+from anvil import *
+import anvil.server
+import anvil.google.auth, anvil.google.drive
+from anvil.google.drive import app_files
+import anvil.users
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+class ItemTemplate1(ItemTemplate1Template):
+  def __init__(self, **properties):
+    # Set Form properties and Data Bindings.
+    self.init_components(**properties)
+
+    # Any code you write here will run when the form opens.
+
+  def trade_box_click(self, **event_args):
+    list = app_tables.nft.search()
+    curuser = anvil.users.get_user()
+    curitem = self.item
+    self.item.update(Owner=curuser,Value=curitem['Value']+int(self.bid_box.text))
+    Notification("Your Purchase is successfull ", title="Congrats!").show()
+    open_form('Browse', my_parameter="an_argument")
+    
+    artist = curitem['Artist']
+    owner = curitem['Owner']
+    owner.update(Balance=owner['Balance']-int(self.bid_box.text))
+    val = int(self.bid_box.text)*0.05
+    artist.update(Balance=artist['Balance'] + val )
+    pass
